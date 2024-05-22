@@ -1,0 +1,7 @@
+@import "base";
+@import "reactflow/dist/style.css";
+@import "overrides/reactflow";
+
+body {
+    --at-apply: font-normal w-full of-x-hidden text-gray-900 bg-white scroll-smooth h-dvh;
+}

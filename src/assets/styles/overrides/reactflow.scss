@@ -1,0 +1,7 @@
+.react-flow__panel {
+    @apply m-6;
+
+    &.react-flow__controls {
+        @apply p-1 border z-10 border-dark-300 flex flex-col gap-y-1 bg-dark-400 shadow-xl shadow-dark-900/10 rounded-lg;
+    }
+}

@@ -1,0 +1,12 @@
+:root {
+    --at-apply: font-sans;
+
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    -webkit-text-size-adjust: 100%;
+}
+
+html {
+    --at-apply: text-16px;
+}
