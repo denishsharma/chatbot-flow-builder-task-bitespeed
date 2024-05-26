@@ -20,8 +20,8 @@
         "noUnusedParameters": true,
         "noEmit": true,
         "isolatedModules": true,
-        "skipLibCheck": true,
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+        "skipLibCheck": true
     },
     "references": [{"path": "./tsconfig.node.json"}],
     "include": ["src"]

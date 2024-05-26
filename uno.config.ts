@@ -1,5 +1,6 @@
 import extractorArbitraryVariants from "@unocss/extractor-arbitrary-variants";
 import { defineConfig, presetIcons, presetUno, presetWebFonts, transformerDirectives, transformerVariantGroup } from "unocss";
+import presetAnimations from "unocss-preset-animations";
 import { presetUseful } from "unocss-preset-useful";
 
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
                 ],
             },
         }),
+        presetAnimations(),
         presetUseful(),
     ],
     transformers: [

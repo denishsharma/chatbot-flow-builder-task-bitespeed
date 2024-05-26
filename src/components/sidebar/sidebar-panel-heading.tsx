@@ -6,7 +6,7 @@ type SidebarPanelHeadingProps = Readonly<ComponentPropsWithoutRef<"div">>;
 
 export default function SidebarPanelHeading({ children, className, ...props }: SidebarPanelHeadingProps) {
     return (
-        <div className={cn("flex items-center text-sm py-2.5 leading-none px-4 border-b select-none border-dark-300 bg-dark-400/50 text-center text-light-100/80 gap-x-2 font-medium", className)} {...props}>
+        <div className={cn("flex items-center text-sm h-10 leading-none px-4 border-b select-none shrink-0 border-dark-300 bg-dark-400/80 text-center text-light-100/60 gap-x-2 font-semibold", className)} {...props}>
             {children}
         </div>
     );

@@ -1,5 +1,8 @@
 @import "base";
 @import "reactflow/dist/style.css";
+@import "overlayscrollbars/styles/overlayscrollbars.css";
+@import "split-pane-react/esm/themes/default.css";
+@import "overrides/overlayscrollbars";
 @import "overrides/reactflow";
 
 body {

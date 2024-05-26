@@ -30,7 +30,7 @@ export default function CustomControls() {
                 <div className="i-mynaui:minus size-5" />
             </CustomControlButton>
 
-            <CustomControlButton onClick={() => fitView()}>
+            <CustomControlButton onClick={() => fitView({ duration: ZOOM_DURATION })}>
                 <div className="i-mynaui:maximize size-4" />
             </CustomControlButton>
         </Controls>
