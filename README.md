@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# BiteSpeed Frontend Task: Chatbot flow builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Chatbot Flow Builder](./task-screenshot.jpeg)
 
-Currently, two official plugins are available:
+[See the live demo](https://chatbot-flow-builder-task-bitespeed.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+We’ll build a simple Chatbot flow builder using React and try to make the code extensible to easily add new features.
 
-## Expanding the ESLint configuration
+A chatbot flow is built by connecting multiple messages to decide the order of execution.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+### Nodes
 
-```js
-export default {
-    // other rules...
-    parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        project: ["./tsconfig.json", "./tsconfig.node.json"],
-        tsconfigRootDir: __dirname,
-    },
-};
-```
+- **Start Node**: The starting point of the flow.
+- **Message Node**: A message to be displayed to the user.
+- **End Node**: The end of the flow.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Sidebars
+
+- **Node Sidebar**: Contains the list of nodes that can be added to the flow.
+- **Node Properties Sidebar**: Contains the properties of the selected node.
+
+### Flow
+
+- **Validation**: Check if the flow is valid or not. A valid flow should have a start node and an end node.
+
+## Tech Stack & Libraries
+
+- React
+- React Flow
+- Zustand
+- TypeScript
+- UnoCss
+
+## Author
+
+- **Denish Sharma**
+    - Email: denishcommon@gmail.com
+    - LinkedIn: [denish-sharma](https://www.linkedin.com/in/denishsharma/)
+    - GitHub: [denish-sharma](https://www.github.com/denishsharma)
