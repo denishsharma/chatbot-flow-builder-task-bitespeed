@@ -10,6 +10,7 @@ import type { TextMessageNodeData } from "~/types/nodes.ts";
 import CustomHandle from "~/components/reactflow/handles/custom-handle.tsx";
 import { type MessageChannelDetail, MessageChannelDetails, type MessageChannelType, getMessageChannelDetails } from "~/constants/channels.ts";
 import { BuilderNode, BuilderNodeDetail } from "~/constants/nodes.ts";
+import { useDeleteNodeReactFlowBuilder } from "~/hooks/builder/reactflow-delete-node.ts";
 import useFlowBuilderStore from "~/stores/flow-builder.tsx";
 import { cn } from "~/utils/cn.ts";
 
@@ -70,6 +71,7 @@ function TextMessageNodeRaw({ id, isConnectable, selected, data }: TextMessageNo
     const [sourceHandleId] = useState<string>(nanoid());
 
     const { setNodes } = useReactFlow();
+    const deleteNode = useDeleteNodeReactFlowBuilder();
 
     const messageChannelDetail = useMemo(() => {
         return getMessageChannelDetails(data.channel);
@@ -134,7 +136,7 @@ function TextMessageNodeRaw({ id, isConnectable, selected, data }: TextMessageNo
                             <button
                                 type="button"
                                 className="size-7 flex items-center justify-center border border-transparent rounded-lg bg-transparent text-red-400 outline-none transition active:(border-dark-200 bg-dark-400/50) hover:(bg-dark-100)"
-                                onClick={() => setNodes(nodes => nodes.filter(node => node.id !== id))}
+                                onClick={() => deleteNode(id)}
                             >
                                 <div className="i-mynaui:trash size-4" />
                             </button>

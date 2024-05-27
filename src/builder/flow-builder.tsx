@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useCallback, useState } from "react";
 import { Background, ReactFlow, addEdge, useEdgesState, useNodesState } from "reactflow";
 
@@ -10,8 +11,10 @@ import CustomControls from "~/components/reactflow/controls/custom-controls.tsx"
 import CustomDeletableEdge from "~/components/reactflow/edges/custom-deletable-edge.tsx";
 import { BuilderNode } from "~/constants/nodes.ts";
 import { useDefaultBuilderNodeInitializer } from "~/hooks/builder/initialize-default-nodes.ts";
+import { useDeleteKeyCodeReactFlowBuilder } from "~/hooks/builder/reactflow-delete-key-code.ts";
 import { useDragDropReactFlowBuilder } from "~/hooks/builder/reactflow-drag-drop.ts";
 import { useIsValidConnectionReactFlowBuilder } from "~/hooks/builder/reactflow-is-valid-connection.ts";
+import { useOnNodesDeleteReactFlowBuilder } from "~/hooks/builder/reactflow-on-nodes-delete.ts";
 
 const nodeTypes: NodeTypes = {
     [BuilderNode.START]: StartNode,
@@ -29,13 +32,15 @@ export default function FlowBuilder() {
     const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
 
     useDefaultBuilderNodeInitializer();
+    const deleteKeyCode = useDeleteKeyCodeReactFlowBuilder();
+    const onNodesDelete = useOnNodesDeleteReactFlowBuilder(nodes);
 
     const [onDragOver, onDrop] = useDragDropReactFlowBuilder(reactFlowInstance, setNodes);
     const isValidConnection = useIsValidConnectionReactFlowBuilder(nodes, edges);
 
     const onConnect = useCallback(
         (connection: Connection) => {
-            const edge = { ...connection, id: `${connection.source}-${connection.target}`, type: "deletable" };
+            const edge = { ...connection, id: nanoid(), type: "deletable" };
             setEdges(edges => addEdge(edge, edges));
         },
         [setEdges],
@@ -54,7 +59,10 @@ export default function FlowBuilder() {
             onConnect={onConnect}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            onNodesDelete={onNodesDelete}
             isValidConnection={isValidConnection}
+            multiSelectionKeyCode={null}
+            deleteKeyCode={deleteKeyCode}
             snapGrid={[16, 16]}
             snapToGrid
             fitView

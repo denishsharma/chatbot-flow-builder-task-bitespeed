@@ -1,7 +1,7 @@
 import { produce } from "immer";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { isEmpty } from "radash";
-import { type ComponentPropsWithoutRef, type ComponentType, useMemo } from "react";
+import { type ComponentPropsWithoutRef, type ComponentType, useCallback, useMemo } from "react";
 import { type Node, useNodes, useReactFlow } from "reactflow";
 import SplitPane, { Pane } from "split-pane-react";
 
@@ -71,13 +71,26 @@ function useNodeList(nodes: Node[]) {
 
 type NodePropertyPanelProps = Readonly<{ id: string; type: BuilderNodeType; data: any }>;
 
-const NODE_PROPERTY_PANEL_COMPONENTS: Partial<Record<BuilderNodeType, ComponentType<{ id: string; type: BuilderNodeType; data: any }>>> = {
+const NODE_PROPERTY_PANEL_COMPONENTS: Partial<Record<BuilderNodeType, ComponentType<{ id: string; type: BuilderNodeType; data: any; updateData: (data: Partial<any>) => void }>>> = {
     [BuilderNode.TEXT_MESSAGE]: TextMessageNodeProperties,
 };
 
 function NodePropertyPanel({ id, type, data }: NodePropertyPanelProps) {
     const PanelComponent = NODE_PROPERTY_PANEL_COMPONENTS[type];
-    return PanelComponent ? <PanelComponent id={id} type={type} data={data} /> : <UnavailableNodeProperties />;
+
+    const { setNodes } = useReactFlow();
+
+    const nodeData = produce(data, () => {});
+
+    const updateData = useCallback((newData: Partial<any>) => {
+        setNodes(nds => produce(nds, (draft) => {
+            const node = draft.find(n => n.id === id);
+            if (node)
+                node.data = { ...node.data, ...newData };
+        }));
+    }, [id, setNodes]);
+
+    return (PanelComponent && nodeData) ? <PanelComponent id={id} type={type} data={nodeData} updateData={updateData} /> : <UnavailableNodeProperties />;
 }
 
 export default function NodePropertiesSidebarPanelBuilder() {

@@ -9,8 +9,8 @@ export default function UnavailableNodeProperties() {
                 Unavailable Properties
             </div>
 
-            <div className="mt-1 w-2/3 text-xs text-light-50/40 font-medium leading-normal">
-                The selected node does not have any properties to display.
+            <div className="mt-1 w-2.5/3 text-xs text-light-50/40 font-medium leading-normal">
+                Either no properties are available for this node or the node is not selected.
             </div>
 
             <div className="mt-8 w-full text-xs text-light-50/40 font-medium italic">

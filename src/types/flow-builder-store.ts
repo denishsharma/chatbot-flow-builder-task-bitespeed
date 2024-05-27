@@ -2,7 +2,7 @@ import type { BuilderNodeType } from "~/constants/nodes.ts";
 
 export interface NodePropertiesSidebarPanelState {
     selectedNode: { id: string; type: BuilderNodeType } | null | undefined;
-    setSelectedNode: (node: { id: string; type: BuilderNodeType }) => void;
+    setSelectedNode: (node: { id: string; type: BuilderNodeType } | undefined | null) => void;
     paneSizes: (string | number)[];
     setPaneSizes: (sizes: (string | number)[]) => void;
 }

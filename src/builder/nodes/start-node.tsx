@@ -2,11 +2,13 @@ import { nanoid } from "nanoid";
 import { memo, useState } from "react";
 import { type NodeProps, Position } from "reactflow";
 
+import type { StartNodeData } from "~/types/nodes.ts";
+
 import CustomHandle from "~/components/reactflow/handles/custom-handle.tsx";
 import { BuilderNode, BuilderNodeDetail } from "~/constants/nodes.ts";
 import { cn } from "~/utils/cn.ts";
 
-type StartNodeProps = NodeProps<{ label?: string }>;
+type StartNodeProps = NodeProps<StartNodeData>;
 
 function StartNodeRaw({ data, selected, isConnectable }: StartNodeProps) {
     const meta = BuilderNodeDetail[BuilderNode.START];

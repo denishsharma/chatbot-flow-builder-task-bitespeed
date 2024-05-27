@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useEffect } from "react";
 import { useReactFlow } from "reactflow";
 
@@ -16,8 +17,8 @@ export function useDefaultBuilderNodeInitializer() {
 
         setNodes([startNode, textMessageNode, endNode]);
         setEdges([
-            { id: "start-text-message", source: startNode.id, target: textMessageNode.id, type: "deletable" },
-            { id: "text-message-end", source: textMessageNode.id, target: endNode.id, type: "deletable" },
+            { id: nanoid(), source: startNode.id, target: textMessageNode.id, type: "deletable" },
+            { id: nanoid(), source: textMessageNode.id, target: endNode.id, type: "deletable" },
         ]);
 
         nodePropertiesSetSelectedNode({ id: startNode.id, type: BuilderNode.START });

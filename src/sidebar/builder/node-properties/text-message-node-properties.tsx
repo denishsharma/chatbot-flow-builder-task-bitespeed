@@ -1,8 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { produce } from "immer";
 import { listify } from "radash";
-import { useCallback, useMemo } from "react";
-import { useReactFlow } from "reactflow";
+import { useMemo } from "react";
 
 import type { BuilderNodeType } from "~/constants/nodes.ts";
 import type { TextMessageNodeData } from "~/types/nodes.ts";
@@ -14,19 +12,10 @@ type TextMessageNodePropertiesProps = Readonly<{
     id: string;
     type: BuilderNodeType;
     data: TextMessageNodeData;
+    updateData: (data: Partial<TextMessageNodeData>) => void;
 }>;
 
-export default function TextMessageNodeProperties({ id, data }: TextMessageNodePropertiesProps) {
-    const { setNodes } = useReactFlow();
-
-    const updateData = useCallback((newData: Partial<TextMessageNodeData>) => {
-        setNodes(nds => produce(nds, (draft) => {
-            const node = draft.find(n => n.id === id);
-            if (node)
-                node.data = { ...node.data, ...newData };
-        }));
-    }, [id, setNodes]);
-
+export default function TextMessageNodeProperties({ id, data, updateData }: TextMessageNodePropertiesProps) {
     const currentMessageChannelDetail = useMemo(() => {
         return MessageChannelDetails[data.channel];
     }, [data.channel]);

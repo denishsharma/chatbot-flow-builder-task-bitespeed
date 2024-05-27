@@ -9,12 +9,21 @@ function findEdges(node: Node, connectedEdges: Edge[]) {
     return { outgoingEdges, incomingEdges };
 }
 
-function checkNode(outgoingEdges: Edge[], incomingEdges: Edge[], type: string) {
+function checkFlowTerminalNode(outgoingEdges: Edge[], incomingEdges: Edge[], type: string) {
     switch (type) {
         case BuilderNode.START:
-            return outgoingEdges.length > 0;
+            return outgoingEdges.length >= 1;
         case BuilderNode.END:
-            return incomingEdges.length > 0;
+            return incomingEdges.length === 1;
+        default:
+            return false;
+    }
+}
+
+function checkLoneNode(outgoingEdges: Edge[], incomingEdges: Edge[], type: string) {
+    switch (type) {
+        case BuilderNode.START:
+            return outgoingEdges.length === 0;
         default:
             return incomingEdges.length === 0;
     }
@@ -40,22 +49,16 @@ export function useFlowValidator(onValidate?: (isValid: boolean) => void): [bool
         for (const node of nodes) {
             const { outgoingEdges, incomingEdges } = findEdges(node, connectedEdges);
 
-            switch (node.type) {
-                case BuilderNode.START:
-                    isStartConnected = checkNode(outgoingEdges, incomingEdges, node.type);
-                    break;
-                case BuilderNode.END:
-                    isEndConnected = checkNode(outgoingEdges, incomingEdges, node.type);
-                    break;
-                default:
-                    if (checkNode(outgoingEdges, incomingEdges, node.type as BuilderNodeType))
-                        nodesWithEmptyTarget.push(node);
+            if (node.type === BuilderNode.START)
+                isStartConnected = checkFlowTerminalNode(outgoingEdges, incomingEdges, BuilderNode.START);
+            else if (node.type === BuilderNode.END)
+                isEndConnected = checkFlowTerminalNode(outgoingEdges, incomingEdges, BuilderNode.END);
 
-                    break;
-            }
+            if (checkLoneNode(outgoingEdges, incomingEdges, node.type as BuilderNodeType))
+                nodesWithEmptyTarget.push(node);
         }
 
-        const hasAnyLoneNode = nodes.length > 1 && nodesWithEmptyTarget.length > 0;
+        const hasAnyLoneNode = nodesWithEmptyTarget.length > 0;
         const isFlowComplete = isStartConnected && isEndConnected && !hasAnyLoneNode;
 
         onValidate?.(isFlowComplete);

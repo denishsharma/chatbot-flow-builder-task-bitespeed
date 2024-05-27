@@ -13,8 +13,8 @@ export function createNodeData<T extends BuilderNodeType>(type: T, data: Builder
 }
 
 const DEFAULT_NODE_DATA: Record<BuilderNodeType, Record<string, any>> = {
-    "start": { label: "Start" },
-    "end": { label: "End" },
+    "start": { label: "Start", deletable: false },
+    "end": { label: "End", deletable: false },
     "text-message": { channel: "sms", message: "" },
 };
 
