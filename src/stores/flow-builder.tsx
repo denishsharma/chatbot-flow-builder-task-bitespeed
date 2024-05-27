@@ -6,12 +6,12 @@ import type { FlowBuilderStore } from "~/types/flow-builder-store.ts";
 const useFlowBuilderStore = create<FlowBuilderStore>()(
     immer(set => ({
         sidebar: {
-            active: "node-properties",
+            active: "available-nodes",
             setActivePanel: panel => set((state) => {
                 state.sidebar.active = panel;
             }),
             showNodePropertiesOf: node => set((state) => {
-                state.sidebar.active = "available-nodes";
+                state.sidebar.active = "node-properties";
                 state.sidebar.panels.nodeProperties.selectedNode = node;
             }),
             panels: {
