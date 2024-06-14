@@ -81,7 +81,7 @@ export default function AvailableNodesSidebarPanelBuilder() {
                 <div className="mt-4 text-balance font-medium">Available Nodes</div>
 
                 <div className="mt-1 w-2/3 text-xs text-light-50/40 font-medium leading-normal">
-                    {isMobile ? "Tap on a node to add it to yout chatbot flow" : "Drag and drop nodes to build your chatbot flow"}
+                    {isMobile ? "Tap on a node to add it to your chatbot flow" : "Drag and drop nodes to build your chatbot flow"}
                 </div>
             </div>
 
