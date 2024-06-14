@@ -8,8 +8,8 @@ export interface NodePropertiesSidebarPanelState {
 }
 
 export interface SidebarState {
-    active: "node-properties" | "available-nodes";
-    setActivePanel: (panel: "node-properties" | "available-nodes") => void;
+    active: "node-properties" | "available-nodes" | "none";
+    setActivePanel: (panel: "node-properties" | "available-nodes" | "none") => void;
     showNodePropertiesOf: (node: { id: string; type: BuilderNodeType }) => void;
     panels: {
         nodeProperties: NodePropertiesSidebarPanelState;
@@ -17,5 +17,7 @@ export interface SidebarState {
 }
 
 export interface FlowBuilderStore {
+    isMobile: boolean;
+    setMobile: (isMobile: boolean) => void;
     sidebar: SidebarState;
 }

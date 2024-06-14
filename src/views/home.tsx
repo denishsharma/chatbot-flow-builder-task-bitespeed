@@ -1,18 +1,26 @@
+import { useMedia } from "react-use";
 import { ReactFlowProvider } from "reactflow";
 import { Toaster } from "sonner";
 
 import FlowBuilder from "~/builder/flow-builder.tsx";
 import NavigationBarFragment from "~/fragments/navigation-bar.tsx";
 import SidebarFragment from "~/fragments/sidebar.tsx";
+import useFlowBuilderStore from "~/stores/flow-builder";
 
 export default function HomeView() {
+    const [setIsMobile] = useFlowBuilderStore(state => [state.setMobile]);
+
+    const isMobile = useMedia("(max-width: 580px)");
+
+    setIsMobile(isMobile);
+
     return (
         <ReactFlowProvider>
             <div className="flex flex-col text-light-50 h-dvh divide-y divide-dark-300">
                 <NavigationBarFragment />
 
                 <div className="flex grow of-y-hidden divide-x divide-dark-300">
-                    <div className="grow bg-dark-500">
+                    <div className="grow bg-dark-500 <md:(bg-dark-700)">
                         <FlowBuilder />
                     </div>
 
@@ -22,7 +30,7 @@ export default function HomeView() {
 
             <Toaster
                 richColors
-                position="bottom-center"
+                position={isMobile ? "top-center" : "bottom-center"}
                 theme="dark"
                 gap={12}
                 closeButton

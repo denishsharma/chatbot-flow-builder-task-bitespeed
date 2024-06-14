@@ -2,6 +2,7 @@ import { Controls, type ReactFlowState, useReactFlow, useStore } from "reactflow
 import { shallow } from "zustand/shallow";
 
 import CustomControlButton from "~/components/reactflow/controls/custom-control-button.tsx";
+import useFlowBuilderStore from "~/stores/flow-builder";
 
 const ZOOM_DURATION = 500;
 
@@ -13,6 +14,8 @@ function selector(s: ReactFlowState) {
 }
 
 export default function CustomControls() {
+    const [isMobile] = useFlowBuilderStore(state => [state.isMobile]);
+
     const { maxZoomReached, minZoomReached } = useStore(selector, shallow);
     const { zoomIn, zoomOut, fitView } = useReactFlow();
 
@@ -21,6 +24,7 @@ export default function CustomControls() {
             showFitView={false}
             showZoom={false}
             showInteractive={false}
+            position={!isMobile ? "bottom-left" : "top-right"}
         >
             <CustomControlButton onClick={() => zoomIn({ duration: ZOOM_DURATION })} disabled={maxZoomReached}>
                 <div className="i-mynaui:plus size-5" />

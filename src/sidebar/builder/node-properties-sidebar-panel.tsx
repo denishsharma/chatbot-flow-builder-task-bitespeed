@@ -121,7 +121,7 @@ export default function NodePropertiesSidebarPanelBuilder() {
         <SidebarPanelWrapper>
             <SplitPane
                 sizes={paneSizes}
-                sashRender={() => <div className="h-0.5 bg-dark-300 transition hover:(scale-y-200 bg-teal-800/50)" />}
+                sashRender={() => <div className="<md:hover(scale-y-100 bg-dark-300) h-0.5 bg-dark-300 transition hover:(scale-y-200 bg-teal-800/50)" />}
                 onChange={setPaneSizes}
                 split="horizontal"
             >

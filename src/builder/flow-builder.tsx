@@ -15,6 +15,7 @@ import { useDeleteKeyCodeReactFlowBuilder } from "~/hooks/builder/reactflow-dele
 import { useDragDropReactFlowBuilder } from "~/hooks/builder/reactflow-drag-drop.ts";
 import { useIsValidConnectionReactFlowBuilder } from "~/hooks/builder/reactflow-is-valid-connection.ts";
 import { useOnNodesDeleteReactFlowBuilder } from "~/hooks/builder/reactflow-on-nodes-delete.ts";
+import useFlowBuilderStore from "~/stores/flow-builder";
 
 const nodeTypes: NodeTypes = {
     [BuilderNode.START]: StartNode,
@@ -27,6 +28,8 @@ const edgeTypes: EdgeTypes = {
 };
 
 export default function FlowBuilder() {
+    const [isMobile] = useFlowBuilderStore(state => [state.isMobile]);
+
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
@@ -67,7 +70,7 @@ export default function FlowBuilder() {
             snapToGrid
             fitView
         >
-            <Background color="rgba(255,255,255,0.25)" gap={32} />
+            <Background color={isMobile ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)"} gap={32} />
             <CustomControls />
         </ReactFlow>
     );

@@ -5,8 +5,12 @@ import type { FlowBuilderStore } from "~/types/flow-builder-store.ts";
 
 const useFlowBuilderStore = create<FlowBuilderStore>()(
     immer(set => ({
+        isMobile: false,
+        setMobile: isMobile => set((state) => {
+            state.isMobile = isMobile;
+        }),
         sidebar: {
-            active: "available-nodes",
+            active: "none",
             setActivePanel: panel => set((state) => {
                 state.sidebar.active = panel;
             }),
