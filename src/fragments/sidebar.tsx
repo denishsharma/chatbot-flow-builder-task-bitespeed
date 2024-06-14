@@ -10,6 +10,7 @@ import AvailableNodesSidebarPanelBuilder from "~/sidebar/builder/available-nodes
 import NodePropertiesSidebarPanelBuilder from "~/sidebar/builder/node-properties-sidebar-panel.tsx";
 import useFlowBuilderStore from "~/stores/flow-builder.tsx";
 import { cn } from "~/utils/cn";
+import { trackSocialLinkClick } from "~/utils/ga4";
 
 type SwitchSidebarPanelProps = Readonly<{ active: SidebarState["active"] }>;
 
@@ -119,6 +120,7 @@ function MobileSidebarFragment({ activePanel, setActivePanel }: MobileSidebarFra
 
                     <a
                         href="https://www.linkedin.com/in/denishsharma/"
+                        onClick={() => trackSocialLinkClick("linkedin")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="size-10 flex shrink-0 items-center justify-center border border-transparent rounded-full bg-transparent outline-none transition active:(border-dark-300 bg-dark-600)"
@@ -128,6 +130,7 @@ function MobileSidebarFragment({ activePanel, setActivePanel }: MobileSidebarFra
 
                     <a
                         href="https://github.com/denishsharma/chatbot-flow-builder-task-bitespeed"
+                        onClick={() => trackSocialLinkClick("github")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="size-10 flex shrink-0 items-center justify-center border border-transparent rounded-full bg-transparent outline-none transition active:(border-dark-300 bg-dark-600)"

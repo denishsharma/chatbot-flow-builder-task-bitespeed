@@ -4,6 +4,7 @@ import type { Node, ReactFlowInstance } from "reactflow";
 import type { BuilderNode } from "~/constants/nodes.ts";
 
 import { NODE_TYPE_DRAG_DATA_FORMAT } from "~/constants/symbols.ts";
+import { trackFlowBuilderAddNode } from "~/utils/ga4";
 import { createNodeWithDefaultData } from "~/utils/node.ts";
 
 export function useDragDropReactFlowBuilder(reactFlowInstance: ReactFlowInstance | null, setNodes: Dispatch<SetStateAction<Node[]>>) {
@@ -31,6 +32,8 @@ export function useDragDropReactFlowBuilder(reactFlowInstance: ReactFlowInstance
             const newNode = createNodeWithDefaultData(type as BuilderNode, { position: pos });
 
             setNodes(nodes => nodes.concat(newNode));
+
+            trackFlowBuilderAddNode(type);
         },
         [reactFlowInstance, setNodes],
     );

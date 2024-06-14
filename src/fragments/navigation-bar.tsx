@@ -5,6 +5,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import { useFlowValidator } from "~/hooks/builder/validate-flow.ts";
 import useFlowBuilderStore from "~/stores/flow-builder";
 import { cn } from "~/utils/cn.ts";
+import { trackSocialLinkClick } from "~/utils/ga4";
 
 function SocialButtonLink({ className, children, ...props }: ComponentPropsWithoutRef<"a">) {
     return (
@@ -74,11 +75,17 @@ export default function NavigationBarFragment() {
                         <div className="h-4 w-px bg-dark-300" />
 
                         <div className="flex items-stretch gap-x-0.5">
-                            <SocialButtonLink href="https://www.linkedin.com/in/denishsharma/">
+                            <SocialButtonLink
+                                onClick={() => trackSocialLinkClick("linkedin")}
+                                href="https://www.linkedin.com/in/denishsharma/"
+                            >
                                 <div className="i-mynaui:brand-linkedin size-4.5" />
                             </SocialButtonLink>
 
-                            <SocialButtonLink href="https://github.com/denishsharma/chatbot-flow-builder-task-bitespeed">
+                            <SocialButtonLink
+                                onClick={() => trackSocialLinkClick("github")}
+                                href="https://github.com/denishsharma/chatbot-flow-builder-task-bitespeed"
+                            >
                                 <div className="i-mynaui:brand-github size-4.5" />
                             </SocialButtonLink>
                         </div>

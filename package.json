@@ -37,6 +37,7 @@
         "overlayscrollbars": "^2.8.3",
         "overlayscrollbars-react": "^0.5.6",
         "radash": "^12.1.0",
+        "react-ga4": "^2.1.0",
         "react-use": "^17.5.0",
         "reactflow": "^11.11.3",
         "sass": "^1.77.2",

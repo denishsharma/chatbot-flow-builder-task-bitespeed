@@ -12,6 +12,7 @@ import TextMessageNodeProperties from "~/sidebar/builder/node-properties/text-me
 import UnavailableNodeProperties from "~/sidebar/builder/node-properties/unavailable-node-properties.tsx";
 import useFlowBuilderStore from "~/stores/flow-builder.tsx";
 import { cn } from "~/utils/cn.ts";
+import { trackSomethingInNodeProperties } from "~/utils/ga4";
 import { defaultOverlayScrollbarsOptions } from "~/utils/overlayscrollbars.ts";
 import { truncateMiddle } from "~/utils/string.ts";
 
@@ -88,7 +89,9 @@ function NodePropertyPanel({ id, type, data }: NodePropertyPanelProps) {
             if (node)
                 node.data = { ...node.data, ...newData };
         }));
-    }, [id, setNodes]);
+
+        trackSomethingInNodeProperties(`update-node-properties-of-${type}`);
+    }, [id, setNodes, type]);
 
     return (PanelComponent && nodeData) ? <PanelComponent id={id} type={type} data={nodeData} updateData={updateData} /> : <UnavailableNodeProperties />;
 }
@@ -142,7 +145,10 @@ export default function NodePropertiesSidebarPanelBuilder() {
                                         icon={`${node.detail.icon} ${node.type === BuilderNode.START || node.type === BuilderNode.END ? "scale-135" : ""}`}
                                         selected={selectedNode?.id === node.id}
                                         pseudoSelected={node.selected}
-                                        onClick={() => onNodeClick(node.id)}
+                                        onClick={() => {
+                                            trackSomethingInNodeProperties("view-node-properties");
+                                            onNodeClick(node.id);
+                                        }}
                                     />
                                 ))}
                             </div>

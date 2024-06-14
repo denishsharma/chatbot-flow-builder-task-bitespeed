@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { type Edge, type Node, getConnectedEdges, useReactFlow } from "reactflow";
 
 import { BuilderNode, type BuilderNodeType } from "~/constants/nodes.ts";
+import { trackFlowBuilderValidate } from "~/utils/ga4";
 
 function findEdges(node: Node, connectedEdges: Edge[]) {
     const outgoingEdges = connectedEdges.filter(edge => edge.source === node.id);
@@ -34,6 +35,8 @@ export function useFlowValidator(onValidate?: (isValid: boolean) => void): [bool
     const { getNodes, getEdges } = useReactFlow();
 
     const validate = useCallback(async () => {
+        trackFlowBuilderValidate();
+
         setIsValidating(true);
 
         await new Promise(resolve => setTimeout(resolve, 300));

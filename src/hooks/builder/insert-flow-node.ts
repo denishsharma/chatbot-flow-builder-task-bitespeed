@@ -3,6 +3,7 @@ import { useReactFlow } from "reactflow";
 
 import type { BuilderNodeType } from "~/constants/nodes";
 
+import { trackFlowBuilderAddNode } from "~/utils/ga4";
 import { createNodeWithDefaultData } from "~/utils/node";
 
 export function useInsertFlowNodeToBuilder() {
@@ -16,6 +17,8 @@ export function useInsertFlowNodeToBuilder() {
 
         const newNode = createNodeWithDefaultData(type, { position: pos });
         setNodes(nodes => nodes.concat(newNode));
+
+        trackFlowBuilderAddNode(type);
     }, [screenToFlowPosition, setNodes]);
 
     return insert;
