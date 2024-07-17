@@ -1,7 +1,7 @@
 import type { MessageChannelType } from "~/constants/channels.ts";
 import type { BuilderNode, BuilderNodeType } from "~/constants/nodes.ts";
 
-export interface BaseNodeData {
+export interface BaseNodeData extends Record<string, any> {
     deletable?: boolean;
 }
 

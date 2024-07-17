@@ -1,8 +1,8 @@
+import { Background, ReactFlow, addEdge, useEdgesState, useNodesState } from "@xyflow/react";
 import { nanoid } from "nanoid";
 import { useCallback, useState } from "react";
-import { Background, ReactFlow, addEdge, useEdgesState, useNodesState } from "reactflow";
 
-import type { Connection, EdgeTypes, NodeTypes, ReactFlowInstance } from "reactflow";
+import type { Connection, Edge, EdgeTypes, Node, NodeTypes, ReactFlowInstance } from "@xyflow/react";
 
 import EndNode from "~/builder/nodes/end-node.tsx";
 import StartNode from "~/builder/nodes/start-node.tsx";
@@ -30,8 +30,8 @@ const edgeTypes: EdgeTypes = {
 export default function FlowBuilder() {
     const [isMobile] = useFlowBuilderStore(state => [state.isMobile]);
 
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
     const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
 
     useDefaultBuilderNodeInitializer();
@@ -43,7 +43,7 @@ export default function FlowBuilder() {
 
     const onConnect = useCallback(
         (connection: Connection) => {
-            const edge = { ...connection, id: nanoid(), type: "deletable" };
+            const edge = { ...connection, id: nanoid(), type: "deletable" } as Edge;
             setEdges(edges => addEdge(edge, edges));
         },
         [setEdges],

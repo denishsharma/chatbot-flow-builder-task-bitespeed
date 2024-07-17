@@ -1,5 +1,5 @@
+import { type Edge, type Node, getConnectedEdges, useReactFlow } from "@xyflow/react";
 import { useCallback, useState } from "react";
-import { type Edge, type Node, getConnectedEdges, useReactFlow } from "reactflow";
 
 import { BuilderNode, type BuilderNodeType } from "~/constants/nodes.ts";
 import { trackFlowBuilderValidate } from "~/utils/ga4";

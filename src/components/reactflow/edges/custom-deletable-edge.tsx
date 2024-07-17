@@ -1,4 +1,4 @@
-import { BezierEdge, EdgeLabelRenderer, type EdgeProps, getBezierPath, useReactFlow } from "reactflow";
+import { BezierEdge, EdgeLabelRenderer, type EdgeProps, getBezierPath, useReactFlow } from "@xyflow/react";
 
 export default function CustomDeletableEdge(props: EdgeProps) {
     const { id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } = props;

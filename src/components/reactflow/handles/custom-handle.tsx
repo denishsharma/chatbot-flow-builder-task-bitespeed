@@ -1,22 +1,22 @@
+import { type Edge, Handle, type HandleProps, type InternalNode, type Node, getConnectedEdges, useNodeId, useStore } from "@xyflow/react";
 import { useMemo } from "react";
-import { type Edge, Handle, type HandleProps, type NodeInternals, getConnectedEdges, useNodeId, useStore } from "reactflow";
 
 import { cn } from "~/utils/cn.ts";
 
-function selector(s: { nodeInternals: NodeInternals; edges: Edge[] }) {
-    return {
-        nodeInternals: s.nodeInternals,
-        edges: s.edges,
-    };
-}
+type CustomHandleProps = Readonly<Omit<HandleProps, "isConnectable"> & { isConnectable: boolean | number | undefined | ((value: { node: InternalNode<Node>; connectedEdges: Edge[] }) => boolean) }>;
 
-function useIsHandleConnectable(isConnectable: Function | boolean | number | undefined, nodeId: string | null, nodeInternals: NodeInternals, edges: Edge[]): boolean | undefined {
-    return useMemo(() => {
+export default function CustomHandle({ isConnectable, ...props }: CustomHandleProps) {
+    const { nodeLookup, edges } = useStore((({ nodeLookup, edges }) => ({ nodeLookup, edges })));
+    const nodeId = useNodeId();
+
+    const isHandleConnectable = useMemo<boolean | undefined>(() => {
         if (!nodeId)
             return false;
-        const node = nodeInternals.get(nodeId);
+
+        const node = nodeLookup.get(nodeId);
         if (!node)
             return false;
+
         const connectedEdges = getConnectedEdges([node], edges);
 
         if (typeof isConnectable === "function")
@@ -26,16 +26,7 @@ function useIsHandleConnectable(isConnectable: Function | boolean | number | und
             return connectedEdges.length < isConnectable;
 
         return isConnectable;
-    }, [edges, isConnectable, nodeId, nodeInternals]);
-}
-
-type CustomHandleProps = Readonly<Omit<HandleProps, "isConnectable"> & { isConnectable: Function | boolean | number | undefined }>;
-
-export default function CustomHandle({ isConnectable, ...props }: CustomHandleProps) {
-    const { nodeInternals, edges } = useStore(selector);
-    const nodeId = useNodeId();
-
-    const isHandleConnectable = useIsHandleConnectable(isConnectable, nodeId, nodeInternals, edges);
+    }, [edges, isConnectable, nodeId, nodeLookup]);
 
     return (
         <Handle

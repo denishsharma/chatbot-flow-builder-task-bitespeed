@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-import type { Node } from "reactflow";
+import type { Node } from "@xyflow/react";
 import type { BuilderNodeType } from "~/constants/nodes.ts";
 import type { BuilderNodeData } from "~/types/nodes.ts";
 

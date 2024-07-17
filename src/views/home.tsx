@@ -1,5 +1,5 @@
+import { ReactFlowProvider } from "@xyflow/react";
 import { useMedia } from "react-use";
-import { ReactFlowProvider } from "reactflow";
 import { Toaster } from "sonner";
 
 import FlowBuilder from "~/builder/flow-builder.tsx";

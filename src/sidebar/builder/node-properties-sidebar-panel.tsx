@@ -1,8 +1,8 @@
+import { type Node, useNodes, useReactFlow } from "@xyflow/react";
 import { produce } from "immer";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { isEmpty } from "radash";
 import { type ComponentPropsWithoutRef, type ComponentType, useCallback, useMemo } from "react";
-import { type Node, useNodes, useReactFlow } from "reactflow";
 import SplitPane, { Pane } from "split-pane-react";
 
 import SidebarPanelHeading from "~/components/sidebar/sidebar-panel-heading.tsx";
@@ -124,7 +124,7 @@ export default function NodePropertiesSidebarPanelBuilder() {
         <SidebarPanelWrapper>
             <SplitPane
                 sizes={paneSizes}
-                sashRender={() => <div className="<md:hover(scale-y-100 bg-dark-300) h-0.5 bg-dark-300 transition hover:(scale-y-200 bg-teal-800/50)" />}
+                sashRender={() => <div className="bg-dark-300) <md:hover(scale-y-100 h-0.5 bg-dark-300 transition hover:(scale-y-200 bg-teal-800/50)" />}
                 onChange={setPaneSizes}
                 split="horizontal"
             >

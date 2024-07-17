@@ -1,6 +1,6 @@
+import { type Node, type NodeProps, Position } from "@xyflow/react";
 import { nanoid } from "nanoid";
 import { memo, useState } from "react";
-import { type NodeProps, Position } from "reactflow";
 
 import type { EndNodeData } from "~/types/nodes.ts";
 
@@ -8,7 +8,7 @@ import CustomHandle from "~/components/reactflow/handles/custom-handle.tsx";
 import { BuilderNode, BuilderNodeDetail } from "~/constants/nodes.ts";
 import { cn } from "~/utils/cn.ts";
 
-type EndNodeProps = NodeProps<EndNodeData>;
+type EndNodeProps = NodeProps<Node<EndNodeData, BuilderNode.END>>;
 
 function EndNodeRaw({ data, selected }: EndNodeProps) {
     const meta = BuilderNodeDetail[BuilderNode.END];

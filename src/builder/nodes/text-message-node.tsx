@@ -1,9 +1,9 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { type Node, type NodeProps, Position, useReactFlow } from "@xyflow/react";
 import { produce } from "immer";
 import { nanoid } from "nanoid";
 import { isEmpty, listify } from "radash";
 import { memo, useCallback, useMemo, useState } from "react";
-import { type NodeProps, Position, useReactFlow } from "reactflow";
 
 import type { TextMessageNodeData } from "~/types/nodes.ts";
 
@@ -62,7 +62,7 @@ function MessageChannelSelector({ detail, onSelect }: MessageChannelSelectorProp
     );
 }
 
-type TextMessageNodeProps = NodeProps<TextMessageNodeData>;
+type TextMessageNodeProps = NodeProps<Node<TextMessageNodeData, BuilderNode.TEXT_MESSAGE>>;
 
 function TextMessageNodeRaw({ id, isConnectable, selected, data }: TextMessageNodeProps) {
     const meta = useMemo(() => BuilderNodeDetail["text-message"], []);

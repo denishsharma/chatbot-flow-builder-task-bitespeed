@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import type { Node } from "reactflow";
+import type { Node } from "@xyflow/react";
 
 import useFlowBuilderStore from "~/stores/flow-builder.tsx";
 import { trackFlowBuilderDeleteNode } from "~/utils/ga4";

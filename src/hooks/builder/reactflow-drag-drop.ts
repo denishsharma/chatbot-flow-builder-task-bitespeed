@@ -1,6 +1,6 @@
 import { type Dispatch, type DragEvent, type SetStateAction, useCallback } from "react";
 
-import type { Node, ReactFlowInstance } from "reactflow";
+import type { Node, ReactFlowInstance } from "@xyflow/react";
 import type { BuilderNode } from "~/constants/nodes.ts";
 
 import { NODE_TYPE_DRAG_DATA_FORMAT } from "~/constants/symbols.ts";

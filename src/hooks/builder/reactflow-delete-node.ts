@@ -1,5 +1,5 @@
+import { getConnectedEdges, useReactFlow } from "@xyflow/react";
 import { useCallback } from "react";
-import { getConnectedEdges, useReactFlow } from "reactflow";
 
 export function useDeleteNodeReactFlowBuilder() {
     const { getNode, getEdges, deleteElements } = useReactFlow();

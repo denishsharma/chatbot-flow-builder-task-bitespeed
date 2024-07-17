@@ -1,4 +1,4 @@
-import { Controls, type ReactFlowState, useReactFlow, useStore } from "reactflow";
+import { Controls, type ReactFlowState, useReactFlow, useStore } from "@xyflow/react";
 import { shallow } from "zustand/shallow";
 
 import CustomControlButton from "~/components/reactflow/controls/custom-control-button.tsx";

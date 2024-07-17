@@ -1,5 +1,5 @@
+import { useReactFlow } from "@xyflow/react";
 import { useCallback } from "react";
-import { useReactFlow } from "reactflow";
 
 import type { BuilderNodeType } from "~/constants/nodes";
 

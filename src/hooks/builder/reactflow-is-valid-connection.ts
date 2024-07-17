@@ -1,11 +1,11 @@
+import { type Connection, type Edge, type Node, getOutgoers } from "@xyflow/react";
 import { useCallback } from "react";
-import { type Connection, type Edge, type Node, getOutgoers } from "reactflow";
 
-function findTargetNode(nodes: Node[], connection: Connection) {
+function findTargetNode(nodes: Node[], connection: Edge | Connection) {
     return nodes.find(node => node.id === connection.target);
 }
 
-function hasCycle(node: Node, connection: Connection, nodes: Node[], edges: Edge[], visited: Set<string> = new Set<string>()) {
+function hasCycle(node: Node, connection: Edge | Connection, nodes: Node[], edges: Edge[], visited: Set<string> = new Set<string>()) {
     if (visited.has(node.id))
         return false;
 
@@ -21,7 +21,7 @@ function hasCycle(node: Node, connection: Connection, nodes: Node[], edges: Edge
 
 export function useIsValidConnectionReactFlowBuilder(nodes: Node[], edges: Edge[]) {
     return useCallback(
-        (connection: Connection) => {
+        (connection: Edge | Connection) => {
             const target = findTargetNode(nodes, connection);
 
             if (target?.id === connection.source)

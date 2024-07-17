@@ -1,6 +1,6 @@
+import { useReactFlow } from "@xyflow/react";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
-import { useReactFlow } from "reactflow";
 
 import { BuilderNode } from "~/constants/nodes.ts";
 import useFlowBuilderStore from "~/stores/flow-builder.tsx";
