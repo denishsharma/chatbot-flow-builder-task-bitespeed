@@ -5,7 +5,7 @@ import { cn } from "~/utils/cn.ts";
 
 type CustomHandleProps = Readonly<Omit<HandleProps, "isConnectable"> & { isConnectable: boolean | number | undefined | ((value: { node: InternalNode<Node>; connectedEdges: Edge[] }) => boolean) }>;
 
-export default function CustomHandle({ isConnectable, ...props }: CustomHandleProps) {
+export default function CustomHandle({ className, isConnectable, ...props }: CustomHandleProps) {
     const { nodeLookup, edges } = useStore((({ nodeLookup, edges }) => ({ nodeLookup, edges })));
     const nodeId = useNodeId();
 
@@ -33,10 +33,7 @@ export default function CustomHandle({ isConnectable, ...props }: CustomHandlePr
             className={cn(
                 "hover:(important:(ring-2 ring-teal-500/50))",
                 "important:(size-2.5 border-1.25 border-light-500 transition bg-dark-500 shadow-sm)",
-                "data-[handlepos=bottom]:(important:-bottom-1.25)",
-                "data-[handlepos=left]:(important:-left-1.25)",
-                "data-[handlepos=right]:(important:-right-1.25)",
-                "data-[handlepos=top]:(important:-top-1.25)",
+                className,
             )}
             isConnectable={isHandleConnectable}
             {...props}
