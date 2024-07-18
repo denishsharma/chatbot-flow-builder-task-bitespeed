@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 
 import type { Connection, Edge, EdgeTypes, Node, NodeTypes, ReactFlowInstance } from "@xyflow/react";
 
+import { ConditionalPathNode } from "~/builder/nodes/conditional-path-node";
 import EndNode from "~/builder/nodes/end-node.tsx";
 import StartNode from "~/builder/nodes/start-node.tsx";
 import TextMessageNode from "~/builder/nodes/text-message-node.tsx";
@@ -21,6 +22,7 @@ const nodeTypes: NodeTypes = {
     [BuilderNode.START]: StartNode,
     [BuilderNode.END]: EndNode,
     [BuilderNode.TEXT_MESSAGE]: TextMessageNode,
+    [BuilderNode.CONDITIONAL_PATH]: ConditionalPathNode,
 };
 
 const edgeTypes: EdgeTypes = {

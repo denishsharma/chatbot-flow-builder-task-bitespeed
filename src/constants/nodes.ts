@@ -4,6 +4,7 @@ export enum BuilderNode {
     START = "start",
     END = "end",
     TEXT_MESSAGE = "text-message",
+    CONDITIONAL_PATH = "conditional-path",
 }
 
 // @unocss-include
@@ -22,6 +23,11 @@ export const BuilderNodeDetail: Record<BuilderNode, { icon: string; title: strin
         icon: "i-mynaui:chat",
         title: "Text Message",
         description: "Send a text message to the user using different messaging platforms like WhatsApp, Messenger, etc.",
+    },
+    [BuilderNode.CONDITIONAL_PATH]: {
+        icon: "i-mynaui:git-branch",
+        title: "Conditional Path",
+        description: "Check a condition and take different paths based on the result.",
     },
 };
 

@@ -16,6 +16,10 @@ const DEFAULT_NODE_DATA: Record<BuilderNodeType, Record<string, any>> = {
     "start": { label: "Start", deletable: false },
     "end": { label: "End", deletable: false },
     "text-message": { channel: "sms", message: "" },
+    "conditional-path": {
+        condition: null,
+        paths: [],
+    },
 };
 
 export function createNodeWithDefaultData(type: BuilderNodeType, data?: Partial<Node>) {
