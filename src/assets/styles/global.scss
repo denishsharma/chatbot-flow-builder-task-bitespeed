@@ -6,9 +6,9 @@
 @import "overrides/reactflow";
 
 body {
-    --at-apply: font-normal w-full of-x-hidden text-gray-900 bg-white scroll-smooth h-dvh;
+    @apply font-normal w-full of-x-hidden text-light-50 bg-dark-700 scroll-smooth h-dvh;
 }
 
 #root {
-    --at-apply: w-full h-full of-hidden;
+    @apply w-full h-full of-hidden;
 }

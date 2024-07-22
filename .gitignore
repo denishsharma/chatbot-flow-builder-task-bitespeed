@@ -25,6 +25,7 @@ dist-ssr
 
 ### VisualStudioCode template
 !.vscode/settings.json
+!.vscode/unocss.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/*.code-snippets
@@ -165,4 +166,3 @@ sketch
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-

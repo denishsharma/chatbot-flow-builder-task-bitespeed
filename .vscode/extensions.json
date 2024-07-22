@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "dotenv.dotenv-vscode",
+        "editorconfig.editorconfig",
+        "usernamehw.errorlens",
+        "dbaeumer.vscode-eslint",
+        "antfu.iconify",
+        "visualstudioexptteam.vscodeintellicode",
+        "christian-kohler.path-intellisense",
+        "antfu.unocss",
+        "vivaxy.vscode-conventional-commits",
+        "mrmlnc.vscode-scss"
+    ]
+}

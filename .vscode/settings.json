@@ -20,7 +20,18 @@
         "xml",
         "gql",
         "graphql",
-        "astro"
+        "astro",
+        "css",
+        "less",
+        "scss",
+        "pcss",
+        "postcss"
     ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "css.customData": [
+        ".vscode/unocss.json"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "conventionalCommits.emojiFormat": "emoji"
 }

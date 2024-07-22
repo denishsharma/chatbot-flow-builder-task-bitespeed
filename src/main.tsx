@@ -1,5 +1,6 @@
 import "virtual:uno.css";
 
+import { RouterProvider } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
 import { setAutoFreeze } from "immer";
 import { ClickScrollPlugin, OverlayScrollbars } from "overlayscrollbars";
@@ -9,7 +10,12 @@ import ReactGA from "react-ga4";
 
 import "~/assets/styles/global.scss";
 
-import HomeView from "~/views/home.tsx";
+import { ApplicationStateProvider } from "~/stores/application-state";
+
+import { router } from "~@/router";
+import { initializeHead } from "~@/unhead";
+
+initializeHead();
 
 ReactGA.initialize("G-CJM5ZGWSKN");
 
@@ -19,7 +25,10 @@ setAutoFreeze(false);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <HomeView />
-        <Analytics />
+        <ApplicationStateProvider>
+            <RouterProvider router={router} />
+
+            <Analytics />
+        </ApplicationStateProvider>
     </React.StrictMode>,
 );

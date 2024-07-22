@@ -1,5 +1,5 @@
 :root {
-    --at-apply: font-sans;
+    @apply font-sans;
 
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -8,5 +8,5 @@
 }
 
 html {
-    --at-apply: text-16px;
+    @apply text-16px;
 }
