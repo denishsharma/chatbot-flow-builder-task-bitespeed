@@ -4,7 +4,7 @@ import { useCallback } from "react";
 
 import CustomControls from "~/modules/flow-builder/components/controls/custom-controls";
 import CustomDeletableEdge from "~/modules/flow-builder/components/edges/custom-deletable-edge";
-import { useDefaultBuilderNodeInitializer } from "~/modules/flow-builder/hooks/use-default-builder-node-initializer";
+import { defaultEdges, defaultNodes } from "~/modules/flow-builder/constants/default-nodes-edges";
 import { useDeleteKeyCode } from "~/modules/flow-builder/hooks/use-delete-key-code";
 import { useDragDropFlowBuilder } from "~/modules/flow-builder/hooks/use-drag-drop-flow-builder";
 import { useIsValidConnection } from "~/modules/flow-builder/hooks/use-is-valid-connection";
@@ -20,12 +20,11 @@ const edgeTypes: EdgeTypes = {
 export function FlowBuilderModule() {
     const [isMobileView] = useApplicationState(s => [s.view.mobile]);
 
-    const [nodes, _, onNodesChange] = useNodesState<Node>([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+    const [nodes, _, onNodesChange] = useNodesState<Node>(defaultNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(defaultEdges);
 
     const { getNodes } = useReactFlow();
 
-    useDefaultBuilderNodeInitializer();
     const deleteKeyCode = useDeleteKeyCode();
     const onNodesDelete = useOnNodesDelete(nodes);
 
@@ -42,6 +41,23 @@ export function FlowBuilderModule() {
         [setEdges],
     );
 
+    const handleAutoAdjustNodeAfterNodeMeasured = useCallback(
+        (id: string) => {
+            setTimeout(() => {
+                const node = getNodes().find(n => n.id === id);
+                if (!node) { return; }
+
+                if (node.measured === undefined) {
+                    handleAutoAdjustNodeAfterNodeMeasured(id);
+                    return;
+                }
+
+                autoAdjustNode(node);
+            });
+        },
+        [autoAdjustNode, getNodes],
+    );
+
     const handleNodesChange = useCallback(
         (changes: NodeChange[]) => {
             onNodesChange(changes);
@@ -53,15 +69,20 @@ export function FlowBuilderModule() {
                         autoAdjustNode(node);
                     }
                 }
+
+                if (change.type === "add") {
+                    handleAutoAdjustNodeAfterNodeMeasured(change.item.id);
+                }
             });
         },
-        [autoAdjustNode, getNodes, onNodesChange],
+        [autoAdjustNode, getNodes, handleAutoAdjustNodeAfterNodeMeasured, onNodesChange],
     );
 
     return (
         <ReactFlow
             proOptions={{ hideAttribution: true }}
             nodeTypes={NODE_TYPES}
+            onInit={({ fitView }) => fitView().then()}
             nodes={nodes}
             onNodesChange={handleNodesChange}
             edgeTypes={edgeTypes}
@@ -76,7 +97,7 @@ export function FlowBuilderModule() {
             multiSelectionKeyCode={null}
             deleteKeyCode={deleteKeyCode}
             snapGrid={[16, 16]}
-            snapToGrid={false}
+            snapToGrid
             fitView
         >
             <Background color={isMobileView ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)"} gap={32} />

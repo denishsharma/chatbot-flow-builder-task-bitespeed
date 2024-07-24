@@ -4,11 +4,11 @@ import { type DragEvent, useCallback } from "react";
 import type { BuilderNode } from "~/modules/nodes/types";
 
 import { NODE_TYPE_DRAG_DATA_FORMAT } from "~/constants/symbols.ts";
-import { createNodeWithDefaultData } from "~/modules/nodes/utils";
-import { trackFlowBuilderAddNode } from "~/utils/ga4";
+import { useInsertNode } from "~/modules/flow-builder/hooks/use-insert-node";
 
 export function useDragDropFlowBuilder() {
-    const { setNodes, screenToFlowPosition } = useReactFlow();
+    const { screenToFlowPosition } = useReactFlow();
+    const insertNode = useInsertNode();
 
     const onDragOver = useCallback((e: DragEvent) => {
         e.preventDefault();
@@ -20,20 +20,14 @@ export function useDragDropFlowBuilder() {
             e.preventDefault();
 
             const type = e.dataTransfer.getData(NODE_TYPE_DRAG_DATA_FORMAT);
-            if (typeof type === "undefined" || !type)
-                return;
+            if (typeof type === "undefined" || !type) return;
 
-            const pos = screenToFlowPosition({
+            insertNode(type as BuilderNode, screenToFlowPosition({
                 x: e.clientX,
                 y: e.clientY,
-            });
-
-            const newNode = createNodeWithDefaultData(type as BuilderNode, { position: pos });
-            setNodes(nodes => nodes.concat(newNode));
-
-            trackFlowBuilderAddNode(type);
+            }));
         },
-        [screenToFlowPosition, setNodes],
+        [insertNode, screenToFlowPosition],
     );
 
     return [onDragOver, onDrop];
