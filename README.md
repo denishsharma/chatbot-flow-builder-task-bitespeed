@@ -25,6 +25,7 @@ A chatbot flow is built by connecting multiple messages to decide the order of e
 ### Flow
 
 - **Validation**: Check if the flow is valid or not. A valid flow should have a start node and an end node.
+- **Auto Adjust**: Nodes will automatically adjust their position to avoid overlapping. It won't adjust the flow lines.
 
 ## Tech Stack & Libraries
 
@@ -40,3 +41,4 @@ A chatbot flow is built by connecting multiple messages to decide the order of e
     - Email: denishcommon@gmail.com
     - LinkedIn: [denish-sharma](https://www.linkedin.com/in/denishsharma/)
     - GitHub: [denish-sharma](https://www.github.com/denishsharma)
+    - React Starter Template: [react-starter-template](https://github.com/denishsharma/react-starter-template)
