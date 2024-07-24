@@ -10,6 +10,7 @@ import SidebarPanelWrapper from "~/modules/sidebar/components/sidebar-panel-wrap
 import { NodeListItem } from "~/modules/sidebar/panels/node-properties/components/node-list-item";
 import { NodePropertyPanel } from "~/modules/sidebar/panels/node-properties/components/node-propery-panel";
 import { useNodeList } from "~/modules/sidebar/panels/node-properties/hooks/use-node-list";
+import IntroductionPropertyPanel from "~/modules/sidebar/panels/node-properties/property-panels/introduction-property-panel";
 import { useApplicationState } from "~/stores/application-state";
 import { trackSomethingInNodeProperties } from "~/utils/ga4";
 import { defaultOverlayScrollbarsOptions } from "~/utils/overlayscrollbars";
@@ -86,9 +87,9 @@ export function NodePropertiesPanel() {
                         </SidebarPanelHeading>
 
                         <OverlayScrollbarsComponent className="grow" defer options={defaultOverlayScrollbarsOptions}>
-                            {selectedNode && (
-                                <NodePropertyPanel id={selectedNode.id} type={selectedNode.type} data={selectedNodeData} />
-                            )}
+                            {selectedNode
+                                ? <NodePropertyPanel id={selectedNode.id} type={selectedNode.type} data={selectedNodeData} />
+                                : <IntroductionPropertyPanel />}
                         </OverlayScrollbarsComponent>
                     </div>
                 </Pane>
