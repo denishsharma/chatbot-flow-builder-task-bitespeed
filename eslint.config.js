@@ -46,4 +46,10 @@ export default antfu(
             "eslint-comments/no-unlimited-disable": "off",
         },
     },
+    {
+        files: ["index.html", "README.md"],
+        rules: {
+            "format/prettier": "off",
+        },
+    },
 );
