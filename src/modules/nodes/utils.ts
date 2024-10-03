@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 import type { Node } from "@xyflow/react";
-import type { BuilderNodeType } from "~/modules/nodes/types";
+import type { BuilderNode, BuilderNodeType } from "~/modules/nodes/types";
 
 import { NODES } from "~/modules/nodes";
 
@@ -24,4 +24,8 @@ export function createNodeWithDefaultData(type: BuilderNodeType, data?: Partial<
     const defaultData = NODES.find(node => node.type === type)?.defaultData;
     if (!defaultData) throw new Error(`No default data found for node type "${type}"`);
     return Object.assign(createNodeData(type, defaultData), data) as Node;
+}
+
+export function createNodeWithData<T>(type: BuilderNode, data: T, node: Partial<Node> = {}) {
+    return Object.assign(createNodeData(type, data), node) as Node;
 }
