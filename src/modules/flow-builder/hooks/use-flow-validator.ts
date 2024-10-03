@@ -15,7 +15,7 @@ function checkFlowTerminalNode(outgoingEdges: Edge[], incomingEdges: Edge[], typ
         case BuilderNode.START:
             return outgoingEdges.length >= 1;
         case BuilderNode.END:
-            return incomingEdges.length === 1;
+            return incomingEdges.length >= 1;
         default:
             return false;
     }

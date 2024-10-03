@@ -16,7 +16,7 @@ const NODE_TYPE = BuilderNode.END;
 
 type EndNodeProps = NodeProps<Node<EndNodeData, typeof NODE_TYPE>>;
 
-export function EndNode({ data, selected }: EndNodeProps) {
+export function EndNode({ data, selected, isConnectable }: EndNodeProps) {
     const meta = useMemo(() => getNodeDetail(NODE_TYPE), []);
 
     const [sourceHandleId] = useState<string>(nanoid());
@@ -39,7 +39,7 @@ export function EndNode({ data, selected }: EndNodeProps) {
                 type="target"
                 id={sourceHandleId}
                 position={Position.Left}
-                isConnectable={1}
+                isConnectable={isConnectable}
             />
         </>
     );
