@@ -54,6 +54,10 @@ export const metadata: RegisterNodeMetadata<EndNodeData> = {
         title: "End",
         description: "End the chatbot flow",
     },
+    connection: {
+        inputs: 1,
+        outputs: 0,
+    },
     available: false,
     defaultData: {
         label: "End",

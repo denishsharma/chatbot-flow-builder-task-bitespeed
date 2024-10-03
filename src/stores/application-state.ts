@@ -8,6 +8,9 @@ interface State {
     view: {
         mobile: boolean;
     };
+    builder: {
+        blurred: boolean;
+    };
     sidebar: {
         active: "node-properties" | "available-nodes" | "none";
         panels: {
@@ -23,6 +26,9 @@ interface Actions {
     actions: {
         view: {
             setMobileView: (isMobile: boolean) => void;
+        };
+        builder: {
+            setBlur: (blur: boolean) => void;
         };
         sidebar: {
             setActivePanel: (panel: "node-properties" | "available-nodes" | "none") => void;
@@ -44,6 +50,11 @@ const applicationStateInstance = defineStoreInstance<State, Actions>((init) => {
             view: {
                 setMobileView: isMobile => set((state) => {
                     state.view.mobile = isMobile;
+                }),
+            },
+            builder: {
+                setBlur: blur => set((state) => {
+                    state.builder.blurred = blur;
                 }),
             },
             sidebar: {
@@ -70,6 +81,9 @@ const applicationStateInstance = defineStoreInstance<State, Actions>((init) => {
 }, {
     view: {
         mobile: false,
+    },
+    builder: {
+        blurred: false,
     },
     sidebar: {
         active: "none",

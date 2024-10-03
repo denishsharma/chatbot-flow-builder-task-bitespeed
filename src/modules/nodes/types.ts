@@ -17,6 +17,10 @@ export interface RegisterNodeMetadata<T = Record<string, any>> {
         title: string;
         description: string;
     };
+    connection: {
+        inputs: number;
+        outputs: number;
+    };
     available?: boolean;
     defaultData?: T;
     propertyPanel?: ComponentType<any>;

@@ -171,6 +171,10 @@ export const metadata: RegisterNodeMetadata<TextMessageNodeData> = {
         title: "Text Message",
         description: "Send a text message to the user using different messaging platforms like WhatsApp, Messenger, etc.",
     },
+    connection: {
+        inputs: 1,
+        outputs: 1,
+    },
     defaultData: {
         channel: "sms",
         message: "",

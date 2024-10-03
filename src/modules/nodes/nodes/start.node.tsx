@@ -53,6 +53,10 @@ export const metadata: RegisterNodeMetadata<StartNodeData> = {
         title: "Start",
         description: "Start the chatbot flow",
     },
+    connection: {
+        inputs: 0,
+        outputs: 1,
+    },
     available: false,
     defaultData: {
         label: "Start",

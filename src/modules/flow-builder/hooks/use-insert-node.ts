@@ -26,6 +26,8 @@ export function useInsertNode() {
             addNodes(newNode);
 
             trackFlowBuilderAddNode(type);
+
+            return newNode;
         },
         [screenToFlowPosition, getNodes, addNodes, updateNode],
     );

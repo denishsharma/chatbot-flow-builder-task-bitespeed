@@ -242,6 +242,10 @@ export const metadata: RegisterNodeMetadata<ConditionalPathNodeData> = {
         title: "Conditional Path",
         description: "Check a condition and take different paths based on the result.",
     },
+    connection: {
+        inputs: 1,
+        outputs: 0,
+    },
     defaultData: {
         condition: null,
         paths: [],
