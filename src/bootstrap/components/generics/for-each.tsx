@@ -1,13 +1,14 @@
-import { hash } from "ohash";
-import { Fragment, type ReactNode } from "react";
+import type { ReactNode } from 'react'
+import { hash } from 'ohash'
+import { Fragment } from 'react'
 
 type ForProps<T> = Readonly<{
-    /** Items to iterate */
-    items: T[];
+  /** Items to iterate */
+  items: T[];
 
-    /** Children to render */
-    children: (item: T, index: number, __key: string) => ReactNode;
-}>;
+  /** Children to render */
+  children: (item: T, index: number, __key: string) => ReactNode;
+}>
 
 /**
  * For each component to iterate over items and render children
@@ -25,11 +26,11 @@ type ForProps<T> = Readonly<{
  * </ForEach>
  */
 export function ForEach<T>({ items, children }: ForProps<T>) {
-    const keyedItems = items.map((item, index) => ({ key: hash({ item, "__x-key-of": index }), item }));
+  const keyedItems = items.map((item, index) => ({ key: hash({ item, '__x-key-of': index }), item }))
 
-    return (
-        keyedItems.map(({ key, item }, index) => (
-            <Fragment key={key}>{children(item, index, key)}</Fragment>
-        ))
-    );
+  return (
+    keyedItems.map(({ key, item }, index) => (
+      <Fragment key={key}>{children(item, index, key)}</Fragment>
+    ))
+  )
 }

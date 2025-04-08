@@ -1,12 +1,12 @@
 :root {
-    @apply font-sans;
+  @apply font-sans;
 
-    text-rendering: geometricPrecision;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
-    -webkit-text-size-adjust: 100%;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  -webkit-text-size-adjust: 100%;
 }
 
 html {
-    @apply text-16px;
+  @apply text-16px;
 }

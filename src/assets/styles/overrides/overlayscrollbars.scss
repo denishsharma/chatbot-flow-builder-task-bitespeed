@@ -1,9 +1,9 @@
 .os-scrollbar {
-    --os-handle-perpendicular-size: 4px;
+  --os-handle-perpendicular-size: 4px;
 
-    .os-scrollbar-track {
-        .os-scrollbar-handle {
-            @apply bg-dark-100/80 rounded-full;
-        }
+  .os-scrollbar-track {
+    .os-scrollbar-handle {
+      @apply bg-dark-100/80 rounded-full;
     }
+  }
 }

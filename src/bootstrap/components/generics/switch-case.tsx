@@ -1,21 +1,22 @@
-import { type ReactElement, type ReactNode, isValidElement } from "react";
+import type { ReactElement, ReactNode } from 'react'
+import { isValidElement } from 'react'
 
 type CaseProps<T, > = Readonly<{
-    /** Single or multiple values to match */
-    value: T | T[];
-    children: ReactNode;
-}>;
+  /** Single or multiple values to match */
+  value: T | T[];
+  children: ReactNode;
+}>
 
 type DefaultProps = Readonly<{
-    children: ReactNode;
-}>;
+  children: ReactNode;
+}>
 
 type SwitchProps<T, > = Readonly<{
-    /** Value to match */
-    match: T;
-    /** Cases or Default case */
-    children: (ReactElement<CaseProps<T>> | ReactElement<DefaultProps>)[] | (ReactElement<CaseProps<T>> | ReactElement<DefaultProps>);
-}>;
+  /** Value to match */
+  match: T;
+  /** Cases or Default case */
+  children: (ReactElement<CaseProps<T>> | ReactElement<DefaultProps>)[] | (ReactElement<CaseProps<T>> | ReactElement<DefaultProps>);
+}>
 
 /**
  * Switch case component to match value with cases and return first matched case or default case
@@ -39,22 +40,22 @@ type SwitchProps<T, > = Readonly<{
  * </Switch>
  */
 export function Switch<T, >({ match, children }: SwitchProps<T>) {
-    let defaultCase: ReactElement<DefaultProps> | null = null;
-    let matchedCase: ReactElement<CaseProps<T>> | null = null;
+  let defaultCase: ReactElement<DefaultProps> | null = null
+  let matchedCase: ReactElement<CaseProps<T>> | null = null;
 
-    (Array.isArray(children) ? children : [children]).forEach((child) => {
-        if (isValidElement<DefaultProps>(child) && child.type === Switch.Default) {
-            defaultCase = child;
-        } else if (isValidElement<CaseProps<T>>(child) && child.type === Switch.Case && !matchedCase) {
-            const caseValue = child.props.value;
+  (Array.isArray(children) ? children : [children]).forEach((child) => {
+    if (isValidElement<DefaultProps>(child) && child.type === Switch.Default) {
+      defaultCase = child
+    } else if (isValidElement<CaseProps<T>>(child) && child.type === Switch.Case && !matchedCase) {
+      const caseValue = child.props.value
 
-            if (Array.isArray(caseValue) ? caseValue.includes(match) : caseValue === match) {
-                matchedCase = child;
-            }
-        }
-    });
+      if (Array.isArray(caseValue) ? caseValue.includes(match) : caseValue === match) {
+        matchedCase = child
+      }
+    }
+  })
 
-    return matchedCase ?? defaultCase;
+  return matchedCase ?? defaultCase
 }
 
 /**
@@ -72,8 +73,8 @@ export function Switch<T, >({ match, children }: SwitchProps<T>) {
  * </Switch.Case>
  */
 Switch.Case = function <T, >({ children }: CaseProps<T>) {
-    return children;
-};
+  return children
+}
 
 /**
  * Default case component to return default case
@@ -85,5 +86,5 @@ Switch.Case = function <T, >({ children }: CaseProps<T>) {
  * </Switch.Default>
  */
 Switch.Default = function ({ children }: DefaultProps) {
-    return children;
-};
+  return children
+}
